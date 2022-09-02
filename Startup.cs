@@ -27,6 +27,7 @@ namespace CMPG323_Project_2___35359099
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddSwaggerGen(options => { options.SwaggerDoc("v2", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "CMPG323 Project 2", Version = "v2", Description = "CMPG323 Project 2 Test for ConnectedOffice Database", }); });
             services.AddDbContext<Models.ConnectedOfficeContext>(options => options.UseSqlServer("name=ConnectionStrings:DefaultConnection"));
         }
 
@@ -48,6 +49,9 @@ namespace CMPG323_Project_2___35359099
             {
                 endpoints.MapControllers();
             });
+
+            app.UseSwagger(); 
+            app.UseSwaggerUI(options => options.SwaggerEndpoint("/swagger/v2/swagger.json", "CMPG323 Project 2"));
         }
     }
 }
