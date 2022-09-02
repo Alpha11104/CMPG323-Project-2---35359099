@@ -7,7 +7,7 @@
 appsettings.*
 
 # User-specific files
-*.rsuser
+*.rsuserW
 *.suo
 *.user
 *.userosscache
