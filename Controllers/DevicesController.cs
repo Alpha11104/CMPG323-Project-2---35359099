@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CMPG323_Project_2___35359099.Models;
+using Microsoft.AspNetCore.Authorization;
+using CMPG323_Project_2___35359099.Authentication;
 
 namespace CMPG323_Project_2___35359099.Controllers
 {
@@ -102,6 +104,23 @@ namespace CMPG323_Project_2___35359099.Controllers
         // DELETE: api/Devices/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Device>> DeleteDevice(Guid id)
+        {
+            var device = await _context.Device.FindAsync(id);
+            if (device == null)
+            {
+                return NotFound();
+            }
+
+            _context.Device.Remove(device);
+            await _context.SaveChangesAsync();
+
+            return device;
+        }
+
+        // DELETE: api/Devices/auth/5
+        [Authorize (Roles = UserRoles.Admin)]
+        [HttpDelete("auth/{id}")]
+        public async Task<ActionResult<Device>> AuthDeleteDevice(Guid id)
         {
             var device = await _context.Device.FindAsync(id);
             if (device == null)

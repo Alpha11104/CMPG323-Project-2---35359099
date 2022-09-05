@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CMPG323_Project_2___35359099.Models;
+using Microsoft.AspNetCore.Authorization;
+using CMPG323_Project_2___35359099.Authentication;
 
 namespace CMPG323_Project_2___35359099.Controllers
 {
@@ -113,6 +115,38 @@ namespace CMPG323_Project_2___35359099.Controllers
             await _context.SaveChangesAsync();
 
             return zone;
+        }
+
+        // DELETE: api/Zones/5
+        [Authorize(Roles = UserRoles.Admin)]
+        [HttpDelete("auth/{id}")]
+        public async Task<ActionResult<Zone>> AuthDeleteZone(Guid id)
+        {
+            var zone = await _context.Zone.FindAsync(id);
+            if (zone == null)
+            {
+                return NotFound();
+            }
+
+            _context.Zone.Remove(zone);
+            await _context.SaveChangesAsync();
+
+            return zone;
+        }
+
+        [HttpGet("{id}/devices")]
+        public async Task<ActionResult<IEnumerable<Device>>> GetDeviceByZoneId(Guid id)
+        {
+            var zone = await _context.Zone.FindAsync(id);
+
+            if (zone == null)
+            {
+                return NotFound();
+            }
+
+            var devices = await _context.Device.Where(d => d.ZoneId == zone.ZoneId).ToListAsync();
+
+            return devices;
         }
 
         private bool ZoneExists(Guid id)

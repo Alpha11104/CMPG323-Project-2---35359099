@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.OpenApi.Models;
 
 namespace CMPG323_Project_2___35359099
 {
@@ -66,9 +67,33 @@ namespace CMPG323_Project_2___35359099
                 };
             });
 
-            services.AddSwaggerGen(options => { options.SwaggerDoc("v2", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "CMPG323 Project 2", Version = "v2", Description = "CMPG323 Project 2 Test for ConnectedOffice Database", }); });
-
-    
+            services.AddSwaggerGen(options => { 
+                options.SwaggerDoc("v2", new Microsoft.OpenApi.Models.OpenApiInfo { 
+                    Title = "CMPG323 Project 2", Version = "v2", 
+                    Description = "CMPG323 Project 2 Test for ConnectedOffice Database", 
+                });
+                options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+                {
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Description = "JWT Authorization header using the Bearer scheme. \r\n\r\n Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\nExample: \"Bearer 1safsfsdfdfd\"",
+                });
+                options.AddSecurityRequirement(new OpenApiSecurityRequirement 
+                {
+                    {
+                        new OpenApiSecurityScheme {
+                            Reference = new OpenApiReference {
+                                Type = ReferenceType.SecurityScheme,
+                                    Id = "Bearer"
+                            }
+                        },
+                        new string[] {}
+                    }
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
