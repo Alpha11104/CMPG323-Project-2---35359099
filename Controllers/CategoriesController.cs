@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace CMPG323_Project_2___35359099.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CategoriesController : ControllerBase

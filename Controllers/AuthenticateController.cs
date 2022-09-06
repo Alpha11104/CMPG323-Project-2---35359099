@@ -1,4 +1,5 @@
 ﻿using CMPG323_Project_2___35359099.Authentication;
+using Microsoft.AspNetCore.Authorization;
 //using JWTAuthentication.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -7,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -88,7 +90,7 @@ namespace CMPG323_Project_2___35359099.Controllers
 
             return Ok(new Response { Status = "Success", Message = "User created successfully!" });
         }
-
+        [Authorize(Roles = UserRoles.Admin)]
         [HttpPost]
         [Route("register-admin")]
         public async Task<IActionResult> RegisterAdmin([FromBody] RegisterModel model)

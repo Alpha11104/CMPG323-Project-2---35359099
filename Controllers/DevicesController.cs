@@ -11,6 +11,7 @@ using CMPG323_Project_2___35359099.Authentication;
 
 namespace CMPG323_Project_2___35359099.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class DevicesController : ControllerBase
