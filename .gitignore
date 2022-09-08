@@ -3,8 +3,11 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+#Ignore for credentials
+appsettings.*
+
 # User-specific files
-*.rsuser
+*.rsuserW
 *.suo
 *.user
 *.userosscache
