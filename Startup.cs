@@ -68,9 +68,9 @@ namespace CMPG323_Project_2___35359099
             });
 
             services.AddSwaggerGen(options => { 
-                options.SwaggerDoc("v2", new Microsoft.OpenApi.Models.OpenApiInfo { 
-                    Title = "CMPG323 Project 2", Version = "v2", 
-                    Description = "CMPG323 Project 2 Test for ConnectedOffice Database", 
+                options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { 
+                    Title = "CMPG323 Project 2 35359099", Version = "v1", 
+                    Description = "CMPG323 Project 2 API for ConnectedOffice Database", 
                 });
                 options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
                 {
@@ -112,7 +112,7 @@ namespace CMPG323_Project_2___35359099
             });
 
             app.UseSwagger(); 
-            app.UseSwaggerUI(options => options.SwaggerEndpoint("/swagger/v2/swagger.json", "CMPG323 Project 2"));
+            app.UseSwaggerUI(options => options.SwaggerEndpoint("/swagger/v1/swagger.json", "CMPG323 Project 2"));
         }
     }
 }

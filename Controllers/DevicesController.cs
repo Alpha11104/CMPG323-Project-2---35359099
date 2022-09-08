@@ -47,6 +47,7 @@ namespace CMPG323_Project_2___35359099.Controllers
         // PUT: api/Devices/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [Authorize(Roles = UserRoles.Admin)]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutDevice(Guid id, Device device)
         {
@@ -79,6 +80,7 @@ namespace CMPG323_Project_2___35359099.Controllers
         // POST: api/Devices
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [Authorize(Roles = UserRoles.Admin)]
         [HttpPost]
         public async Task<ActionResult<Device>> PostDevice(Device device)
         {
@@ -101,7 +103,7 @@ namespace CMPG323_Project_2___35359099.Controllers
 
             return CreatedAtAction("GetDevice", new { id = device.DeviceId }, device);
         }
-
+        [Authorize(Roles = UserRoles.Admin)]
         // DELETE: api/Devices/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Device>> DeleteDevice(Guid id)
@@ -120,7 +122,7 @@ namespace CMPG323_Project_2___35359099.Controllers
 
         // DELETE: api/Devices/auth/5
         [Authorize (Roles = UserRoles.Admin)]
-        [HttpDelete("auth/{id}")]
+        [HttpDelete("private/{id}")]
         public async Task<ActionResult<Device>> AuthDeleteDevice(Guid id)
         {
             var device = await _context.Device.FindAsync(id);

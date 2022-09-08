@@ -47,6 +47,7 @@ namespace CMPG323_Project_2___35359099.Controllers
         // PUT: api/Zones/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [Authorize(Roles = UserRoles.Admin)]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutZone(Guid id, Zone zone)
         {
@@ -79,6 +80,7 @@ namespace CMPG323_Project_2___35359099.Controllers
         // POST: api/Zones
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [Authorize(Roles = UserRoles.Admin)]
         [HttpPost]
         public async Task<ActionResult<Zone>> PostZone(Zone zone)
         {
@@ -120,7 +122,7 @@ namespace CMPG323_Project_2___35359099.Controllers
 
         // DELETE: api/Zones/5
         [Authorize(Roles = UserRoles.Admin)]
-        [HttpDelete("auth/{id}")]
+        [HttpDelete("private/{id}")]
         public async Task<ActionResult<Zone>> AuthDeleteZone(Guid id)
         {
             var zone = await _context.Zone.FindAsync(id);
