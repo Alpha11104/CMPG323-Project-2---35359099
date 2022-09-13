@@ -1,4 +1,7 @@
 # CMPG323-Project-2---35359099
+### Screenshot of API routes in API Manager
+![Routes 1](./CMPG323_apim_1.png)
+![Routes 2](./CMPG323_apim_2.png)
 ### Demo Accounts for login
 The following accounts have been created in the database for use for the marker.
 #### Role User:
